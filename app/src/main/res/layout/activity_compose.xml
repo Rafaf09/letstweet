@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.codepath.apps.twitter.ComposeActivity">
+
+    <EditText
+        android:id="@+id/etNewTweet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:hint="Write your thoughts."
+        android:inputType="textPersonName"
+        android:maxLength="140" />
+
+    <Button
+        android:id="@+id/btnNewTweet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Tweet"
+        android:layout_below="@+id/etNewTweet"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="157dp" />
+
+    <TextView
+        android:id="@+id/tvChar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnNewTweet"
+        android:layout_marginBottom="14dp"
+        android:layout_toStartOf="@+id/btnNewTweet" />
+
+</RelativeLayout>
