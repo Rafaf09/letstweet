@@ -9,15 +9,18 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.codepath.apps.twitter.fragments.ProgressListener;
+import com.codepath.apps.twitter.fragments.TweetsListFragment;
 import com.codepath.apps.twitter.fragments.TweetsPagerAdapter;
 import com.codepath.apps.twitter.models.Tweet;
 
 import org.parceler.Parcels;
 
-public class TimelineActivity extends AppCompatActivity implements ProgressListener {
+public class TimelineActivity extends AppCompatActivity implements ProgressListener, TweetsListFragment.TweetSelectedListener {
 
 
     //MentionsTimeLineFragment fragmentMentionsTimeline;
@@ -76,19 +79,21 @@ public class TimelineActivity extends AppCompatActivity implements ProgressListe
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle presses on the action bar items
-        switch (item.getItemId()) {
-            case R.id.miCompose:
-                composeMessage();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+    // TODO: This is the code for the compose activity menu
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle presses on the action bar items
+//        switch (item.getItemId()) {
+//            case R.id.miCompose:
+//                composeMessage();
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
-    private void composeMessage() {
+
+    public void startCompose(View view) {
         Intent i = new Intent(TimelineActivity.this, ComposeActivity.class);
         startActivityForResult(i,1);
     }
@@ -104,4 +109,17 @@ public class TimelineActivity extends AppCompatActivity implements ProgressListe
 
         }
     }
+
+    public void onProfileView(MenuItem item) {
+        Intent i = new Intent(TimelineActivity.this, ProfileActivity.class);
+        startActivity(i);
+    }
+
+    @Override
+    public void onTweetSelected(Tweet tweet) {
+        Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
+
+    }
+
+
 }

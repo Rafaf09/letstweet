@@ -30,8 +30,11 @@ import cz.msebera.android.httpclient.Header;
  * Created by rafelix on 7/3/17.
  */
 
-public class TweetsListFragment extends Fragment {
+public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAdapterListener {
 
+    public interface TweetSelectedListener {
+        public void onTweetSelected(Tweet tweet);
+    }
     public TweetAdapter tweetAdapter;
     public ArrayList<Tweet> tweets;
     public RecyclerView rvTweets;
@@ -44,7 +47,7 @@ public class TweetsListFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragments_tweets_list, container, false);
         rvTweets = (RecyclerView) v.findViewById(R.id.rvTweet);
         tweets = new ArrayList<>();
-        tweetAdapter = new TweetAdapter(tweets);
+        tweetAdapter = new TweetAdapter(tweets, this);
         client = TwitterApp.getRestClient();
         rvTweets.setLayoutManager(new LinearLayoutManager(getContext()));
         rvTweets.setAdapter(tweetAdapter);
@@ -129,5 +132,12 @@ public class TweetsListFragment extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onItemSelected(View view, int position) {
+        Tweet tweet = tweets.get(position);
+
+        ((TweetSelectedListener) getActivity()).onTweetSelected(tweet);
     }
 }
